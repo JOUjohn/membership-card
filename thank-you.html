@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank You — JORDAN MEMBERSHIP CARD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>.wrap{max-width:860px;margin:40px auto;padding:20px}</style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" style="background:linear-gradient(135deg,#22c55e33,#60a5fa33)">
+      <h1 style="font-size:clamp(28px,5vw,40px);margin:0 0 6px;font-weight:800">Thank you — Registration received ✅</h1>
+      <div class="muted" id="headline"></div>
+    </section>
+
+    <section id="details" class="stack"></section>
+
+    <div class="row" style="justify-content:flex-start">
+      <button id="printBtn" class="btn">Print / Save PDF</button>
+      <a href="index.html" class="btn btn-primary">Return to Home</a>
+    </div>
+
+    <footer class="muted" style="margin-top:20px;text-align:center">© <span id="year"></span> Jordan Daniel Management</footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function row(label, value){
+      const d = document.createElement('div');
+      d.className = 'card';
+      d.style.padding = '12px 14px';
+      d.innerHTML = `<strong>${label}</strong><div class="muted">${value || '—'}</div>`;
+      return d;
+    }
+
+    const EL_details = document.getElementById('details');
+    const EL_headline = document.getElementById('headline');
+
+    let payload = null;
+    try{
+      payload = JSON.parse(localStorage.getItem('jdm_last_payload_v1') || 'null');
+    }catch(e){ payload = null; }
+
+    if(!payload){
+      EL_headline.innerHTML = "We couldn't find your submission details. Please return <a href='index.html'>home</a> and submit the form again.";
+    } else {
+      const {ref, amount, data} = payload;
+      const nice = (n)=> `$${Number(n||0).toLocaleString()}`;
+      EL_headline.innerHTML = `Reference: <strong>${ref}</strong> • Total: <strong>${nice(amount)}</strong>`;
+
+      EL_details.append(
+        row('Name', `${data.first||''} ${data.middle||''} ${data.last||''}`.trim()),
+        row('Email', data.email),
+        row('Phone', `${data.cc||''} ${data.phone||''}`),
+        row('Membership Level', `${data.level} (${nice(amount)})`),
+        row('Address', data.address),
+        row('Gender', data.gender||'—'),
+        row('DOB', data.dob||'—'),
+        row('Occupation', data.occupation||'—'),
+        row('Referral Code', data.ref||'—'),
+        row('Uploaded Files', (data.giftcard_files||[]).map(f=>f.name).join(', ')||'—')
+      );
+    }
+
+    document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+  </script>
+</body>
+</html>

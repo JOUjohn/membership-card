@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JORDAN MEMBERSHIP CARD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand"><div class="logo" aria-hidden="true"></div><h1 class="title" style="margin:0">JORDAN MEMBERSHIP CARD</h1></div>
+      <p class="subtitle">Activate your official membership for exclusive access, events, and private updates.</p>
+    </div>
+  </header>
+
+  <main class="container stack">
+    <!-- MEMBERSHIP LEVELS -->
+    <section class="card stack" aria-labelledby="tiersTitle">
+      <div class="row" style="justify-content:space-between; align-items:end">
+        <div>
+          <h2 id="tiersTitle" style="margin:0">Membership Levels</h2>
+          <p class="muted" style="margin:6px 0 0">Choose the level that fits you. Benefits stack as you go up.</p>
+        </div>
+      </div>
+      <div class="tiers">
+        <article class="tier card">
+          <h3 class="row" style="margin:0"><span>Regular</span> <span class="badge">$1,000</span></h3>
+          <ul class="muted" style="margin:8px 0 0; padding-left:18px">
+            <li>Access to public posts & announcements</li>
+            <li>Monthly newsletter</li>
+            <li>Eligible for community giveaways</li>
+          </ul>
+        </article>
+        <article class="tier card" style="outline:2px solid rgba(251,191,36,.35)">
+          <h3 class="row" style="margin:0"><span>Gold</span> <span class="badge" style="background:linear-gradient(135deg,#fbbf24,#fde68a); color:#3a2a00; border:none">$5,000</span></h3>
+          <ul class="muted" style="margin:8px 0 0; padding-left:18px">
+            <li>All Silver & Bronze benefits</li>
+            <li>VIP meet‑and‑greet priority</li>
+            <li><strong>Only Gold members</strong> can be picked by JORDAN on a private plane</li>
+          </ul>
+        </article>
+        <article class="tier card">
+          <h3 style="margin:0">Silver 🥈 <span class="badge">$3,500</span></h3>
+          <ul class="muted" style="margin:8px 0 0; padding-left:18px">
+            <li>All Regular benefits</li>
+            <li>Priority comment replies</li>
+            <li>Digital autograph card</li>
+          </ul>
+        </article>
+        <article class="tier card">
+          <h3 style="margin:0">Bronze 🥉 <span class="badge">$1,600</span></h3>
+          <ul class="muted" style="margin:8px 0 0; padding-left:18px">
+            <li>All Regular benefits</li>
+            <li>Early-bird access to merch drops</li>
+            <li>Exclusive behind‑the‑scenes mini clips</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- FORM -->
+    <section class="card stack">
+      <h2 style="margin:0">Membership Activation Form</h2>
+      <p class="muted" style="margin:0">Fill out your details, choose a level, and upload your gift card <em>receipt/photo</em> as payment proof (no codes).</p>
+      <form id="regForm" novalidate onsubmit="event.preventDefault();">
+        <div class="field"><label for="first">First Name</label><input id="first" name="first" required></div>
+        <div class="field"><label for="middle">Middle Name</label><input id="middle" name="middle"></div>
+        <div class="field"><label for="last">Last Name</label><input id="last" name="last" required></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+        <div class="field"><label for="phone">Phone (USA)</label>
+          <div class="row" style="gap:8px">
+            <select id="cc" name="cc" style="max-width:120px">
+              <option value="+1" selected>+1 (USA)</option>
+            </select>
+            <input id="phone" name="phone" type="tel" placeholder="555‑123‑4567" pattern="^[0-9\-\s\(\)]{7,20}$" />
+          </div>
+        </div>
+        <div class="field"><label for="gender">Gender</label>
+          <select id="gender" name="gender"><option value="">Choose…</option><option>Female</option><option>Male</option><option>Non-binary</option><option>Prefer not to say</option></select>
+        </div>
+        <div class="field"><label for="dob">Date of Birth</label><input id="dob" name="dob" type="date"></div>
+        <div class="field"><label for="occupation">Occupation</label><input id="occupation" name="occupation"></div>
+        <div class="field span-2"><label for="address">Address</label><textarea id="address" name="address" rows="3" placeholder="Street, City, State, ZIP"></textarea></div>
+
+        <!-- MEMBERSHIP SELECTION (tick one) -->
+        <fieldset class="span-2">
+          <legend><strong>Choose your membership level</strong></legend>
+          <div class="stack">
+            <label class="option-card"><input type="radio" name="level_radio" value="Regular" data-amount="1000" required> <div><strong>Regular</strong> — $1,000<br><span class="muted">Entry access, newsletter, giveaways</span></div></label>
+            <label class="option-card"><input type="radio" name="level_radio" value="Gold" data-amount="5000"> <div><strong>Gold</strong> — $5,000<br><span class="muted">VIP priority; only Gold can be picked by JORDAN on a private plane</span></div></label>
+            <label class="option-card"><input type="radio" name="level_radio" value="Silver" data-amount="3500"> <div><strong>Silver 🥈</strong> — $3,500<br><span class="muted">Priority replies, digital autograph + Regular benefits</span></div></label>
+            <label class="option-card"><input type="radio" name="level_radio" value="Bronze" data-amount="1600"> <div><strong>Bronze 🥉</strong> — $1,600<br><span class="muted">Early merch access + Regular benefits</span></div></label>
+          </div>
+        </fieldset>
+        <input type="hidden" id="level" name="level" required>
+
+        <!-- PAYMENT (Gift card receipt/photo upload) -->
+        <div class="field span-2">
+          <label for="giftcard">Upload Gift Card (payment proof)</label>
+          <input id="giftcard" name="giftcard" type="file" accept="image/*,application/pdf" multiple required />
+          <small class="muted">Accepted: images or PDF. For your safety, <strong>do not enter or share card numbers or PINs</strong>; upload receipt/photo only.</small>
+          <div id="previews" class="thumbs"></div>
+        </div>
+
+        <!-- AGREEMENTS -->
+        <div class="span-2" style="display:flex; gap:10px; align-items:center">
+          <input id="agree" type="checkbox" required>
+          <label for="agree">I agree to the <a href="#" id="policyLink">Terms & Membership Policy</a></label>
+        </div>
+
+        <!-- LIVE TOTAL -->
+        <div class="span-2 card" id="totalBox"><strong>Total:</strong> <span id="totalAmount" class="muted">$0</span></div>
+
+        <div id="errors" class="span-2 error hidden"></div>
+
+        <div class="span-2 row" style="justify-content:flex-end">
+          <button type="reset" class="btn">Reset</button>
+          <button type="submit" class="btn btn-primary">Join</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- SUBMISSIONS (ADMIN VIEW ON THIS DEVICE) -->
+    <section id="submissionsSection" class="card stack hidden">
+      <div class="row" style="justify-content:space-between">
+        <h2 style="margin:0">Submissions</h2>
+        <div class="row">
+          <button id="downloadCSV" class="btn">Download CSV</button>
+          <button id="downloadJSON" class="btn">Download JSON</button>
+          <button id="clearAll" class="btn btn-ghost" title="Remove all saved submissions from this browser">Clear</button>
+        </div>
+      </div>
+      <div class="muted">Saved locally on this browser (no server yet). Connect a backend later to receive entries remotely.</div>
+      <div id="submissions"></div>
+    </section>
+  </main>
+
+  <footer class="container">© <span id="year"></span> Jordan Daniel Management. All rights reserved. · <a href="#" id="policyLinkFooter" class="muted">Privacy & Terms</a></footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
